@@ -1,3 +1,28 @@
+#include <iostream>
+#include <string>
+#include "tes.h"
+
+using namespace std;
+
+void createList(list &l)
+{
+    l.first=0;
+}
+
+listElement *alokasi(company x)
+{
+    listElement *newElement = new listElement;
+    newElement->info=x;
+    newElement->next=0;
+
+    return newElement;
+}
+
+void dealokasi(listElement *p)
+{
+    delete p;
+}
+
 void insertFirst(list &l, listElement *p)
 {
     if (l.first==0)
@@ -26,6 +51,56 @@ void insertLast(list &l, listElement *p)
         }
         it->next=p;
     }
+}
+
+void insertAfter (list &l, listElement *p, listElement *prec)
+{
+    p->next=prec->next;
+    prec->next=p;
+}
+
+void deleteFirst(list &l, listElement *&p)
+{
+    if(l.first==0)
+    {
+        return;
+    }
+    else
+    {
+        p=l.first;
+        l.first=p->next;
+    }
+}
+
+void deleteLast(list &l, listElement *&p)
+{
+    if(l.first==0)
+    {
+        return;
+    }
+    else
+    {
+        listElement *it = l.first;
+        listElement *prev = it;
+
+        while(it->next!=0)
+        {
+            prev=it;
+            it=it->next;
+        }
+
+    if(it==l.first)
+        l.first=0;
+    prev->next=0;
+    p=it;
+    }
+}
+
+void deleteAfter (list &l, listElement *p, listElement *prec)
+{
+    p = prec->next;
+    prec->next = p->next;
+    p->next = 0;
 }
 
 void printInfo(list &l)
