@@ -27,3 +27,34 @@ void insertLast(list &l, listElement *p)
         it->next=p;
     }
 }
+
+void printInfo(list &l)
+{
+    listElement *it=l.first;
+    while (it!=0)
+    {
+        cout<<it->info.id<<", "
+            <<it->info.nama<<", "
+            <<it->info.depart<<", "
+            <<it->info.anggota<<", "
+            <<it->info.gaji<<endl;
+        it=it->next;
+    }
+    cout<<endl;
+}
+
+listElement *findElm(list &l, company x)
+{
+    listElement *it = l.first;
+    cout<<"Masukkan id yg ingin dicari :"; cin>>x.id;
+    while (it!=0)
+    {
+        if (it->info.id==x.id)
+        {
+            return it;
+        }
+        it=it->next;
+    }
+    cout<<"Data tidak ditemukan";
+    return 0;
+}
